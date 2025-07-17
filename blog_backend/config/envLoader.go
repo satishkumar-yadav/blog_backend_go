@@ -8,23 +8,15 @@ import (
 	"github.com/joho/godotenv"
 )
 
-/*
-const (
-	SECRET_KEY string
-)*/
-
 var (
-	PORT          string
-	ROUTER_TYPE   string
-	DB_TYPE       string
-	MYSQL_DB      string
-	SECRET_KEY    string
-	USER_EMAIL    string
-	USER_PASS     string
-	DSN           string
-	LOGIN_QUERY   string
-	REG_CHECK     string
-	APPROVE_QUERY string
+	PORT        string
+	ROUTER_TYPE string
+	DB_TYPE     string
+	MYSQL_DB    string
+	SECRET_KEY  string
+	USER_EMAIL  string
+	USER_PASS   string
+	DSN         string
 )
 
 // init() automatically loads .env and sets package-level variables
@@ -42,22 +34,16 @@ func init() {
 	SECRET_KEY = os.Getenv("JWT_SECRET")
 	USER_EMAIL = os.Getenv("EMAIL_USER")
 	USER_PASS = os.Getenv("EMAIL_PASS")
-	LOGIN_QUERY = os.Getenv("LOGIN_QUERY")
-	REG_CHECK = os.Getenv("REG_CHECK")
-	APPROVE_QUERY = os.Getenv("APPROVE_QUERY")
 
 	DB_USER := os.Getenv("DB_USER")
 	DB_PASS := os.Getenv("DB_PASSWORD")
 
 	DB_HOST := getEnv("DB_HOST", "localhost")
 	MYSQL_PORT := getEnv("MYSQL_PORT", "3306")
-	// DB_HOST_URL := getEnv("DB_HOST_URL", "127.0.0.1")
-	// DB_REMOTE_HOST := getEnv("DB_REMOTE_HOST", "db remote")
-	// MYSQL_REMOTE_HOST := getEnv("MYSQL_REMOTE_HOST", "mysql remote")
-	MYSQL_DSN := getEnv("DSN", "user:password@tcp(127.0.0.1:3306)/db")
+	//MYSQL_DSN := getEnv("DSN", "user:password@tcp(127.0.0.1:3306)/db")
 
 	DSN = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DB_USER, DB_PASS, DB_HOST, MYSQL_PORT, MYSQL_DB)
-	DSN = MYSQL_DSN
+	//DSN = MYSQL_DSN
 
 }
 
