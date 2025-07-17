@@ -20,7 +20,7 @@ func main() {
 
 	// cors added - allow frontend from Vite port
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     "http://localhost:5173", // adjust based on frontend port
+		AllowOrigins:     "https://go-blogmanager.netlify.app/", // adjust based on frontend port
 		AllowCredentials: true,
 	}))
 
