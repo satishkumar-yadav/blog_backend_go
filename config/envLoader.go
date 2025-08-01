@@ -42,7 +42,8 @@ func init() {
 	MYSQL_PORT := getEnv("MYSQL_PORT", "3306")
 	//MYSQL_DSN := getEnv("DSN", "user:password@tcp(127.0.0.1:3306)/db")
 
-	DSN = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DB_USER, DB_PASS, DB_HOST, MYSQL_PORT, MYSQL_DB)
+	DSN = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", DB_USER, DB_PASS, DB_HOST, MYSQL_PORT, MYSQL_DB)
+	//DSN = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DB_USER, DB_PASS, DB_HOST, MYSQL_PORT, MYSQL_DB)
 	//DSN = MYSQL_DSN
 
 }

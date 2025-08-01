@@ -1,12 +1,26 @@
 package models
 
+import (
+	"gorm.io/gorm"
+)
+
 type Blog struct {
-	Id     uint   `json:"id"`
-	Title  string `json:"title"`
-	Desc   string `json:"desc"`
-	Image  string `json:"image"`
-	UserID string `json:"userid"`
-	User   User   `json:"user" gorm:"foreignkey:UserID"`
+	gorm.Model
+	Title       string `json:"title"  gorm:"size:100"`
+	Description string `json:"description"`
+	Image       string `json:"image"` // Stores filename or URL of uploaded image
+	UserID      string `json:"user_id" gorm:"size:36;index"`
+	User        User   `json:"user"
+	gorm:"foreignKey:UserID;references:UserID"`
 }
 
-//User   User   `json:"user" ;gorm:"foreignkey:UserID"`  // gpt removed ;
+/* gorm.Model auto embedded
+
+type Model struct {
+    ID        uint           `gorm:"primaryKey"`
+    CreatedAt time.Time
+    UpdatedAt time.Time
+    DeletedAt gorm.DeletedAt `gorm:"index"`
+}
+
+*/
