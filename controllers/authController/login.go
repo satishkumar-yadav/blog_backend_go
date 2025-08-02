@@ -109,12 +109,13 @@ func Login(c *fiber.Ctx) error {
 	cookie := fiber.Cookie{
 		Name:     "jwt",
 		Value:    token,
-		Expires:  time.Now().Add(time.Hour * 24),
+		Expires:  time.Now().Add(time.Hour * 24), // Set for persistent cookies; omit for "session" cookies
 		HTTPOnly: true,
-		Secure:   false, // false for local, true for HTTPS
-		SameSite: "Lax", // Optional but helpful, or "None" with Secure: true for cross-origin
-		Path:     "/",   // ensure path is root
-		//Domain:   "localhost",  // ✅ add this, hardcoding the backend cookie domain temporarily: If still blank
+		Secure:   true,   // false for local, true for HTTPS
+		SameSite: "None", // Optional but helpful, or "None" with Secure: true for cross-origin
+		Path:     "/",    // ensure path is root
+		//Domain:   "localhost",  // ✅ add this, hardcoding the backend cookie domain temporarily: If still blank / omit for default (current host)
+
 	}
 
 	c.Cookie(&cookie)
@@ -122,7 +123,7 @@ func Login(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "Congrats! You have Successfully Logged-in",
 		"user":    user,
-		"user-id": user.UserID,
+		//"user-id": user.UserID,
 		// "user-name": user.FirstName,
 		// "expires": time.Now().Add(time.Hour * 24).Unix(), // 👈 Send expiry  //////
 		"expires": time.Now().Add(time.Hour * 24), // 👈 Send expiry  //////
