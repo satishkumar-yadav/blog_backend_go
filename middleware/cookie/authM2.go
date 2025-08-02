@@ -20,7 +20,8 @@ func IsAuthenticate(c *fiber.Ctx) error {
 	if err != nil {
 		fmt.Println("error", err.Error())
 		c.Status(fiber.StatusUnauthorized)
-		return c.JSON(fiber.Map{"message": "Unauthenticated ! Token Expired or not found, Please Login First"}) // expose token expiration
+		return c.JSON(fiber.Map{"message": "Unauthenticated ! Token Expired or not found, Please Login First",
+			"userCookie :": cookie, "Parsing error :": err, "Parsed Issuer : ": issuer}) // expose token expiration
 	}
 
 	c.Locals("userId", issuer) //

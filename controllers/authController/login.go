@@ -122,7 +122,7 @@ func Login(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "Congrats! You have Successfully Logged-in",
 		"user":    user,
-		// "user-id":   user.UserID,
+		"user-id": user.UserID,
 		// "user-name": user.FirstName,
 		// "expires": time.Now().Add(time.Hour * 24).Unix(), // 👈 Send expiry  //////
 		"expires": time.Now().Add(time.Hour * 24), // 👈 Send expiry  //////
