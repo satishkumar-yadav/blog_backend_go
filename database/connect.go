@@ -16,9 +16,11 @@ import (
 
 func Connect(app *fiber.App) {
 	dsn := config.DSN
+	fmt.Println("DSN : ",dsn)
 
 	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
+		fmt.Printf("DB Connection error: %v\n", err)
 		panic("Could not connect to the database")
 	} else {
 		//log.Println("Database connected successfully")
