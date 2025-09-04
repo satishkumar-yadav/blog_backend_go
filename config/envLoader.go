@@ -1,50 +1,31 @@
 package config
 
 import (
-	"fmt"
-	"log"
 	"os"
-
-	"github.com/joho/godotenv"
 )
 
 var (
-	PORT        string
-	ROUTER_TYPE string
-	DB_TYPE     string
-	MYSQL_DB    string
-	SECRET_KEY  string
-	USER_EMAIL  string
-	USER_PASS   string
-	DSN         string
+	PORT       string
+	SECRET_KEY string
+	USER_EMAIL string
+	USER_PASS  string
+	DSN        string
 )
 
 // init() automatically loads .env and sets package-level variables
 func init() {
-	err := godotenv.Load() // load env into memory
-	if err != nil {
-		log.Println("❌ Error loading .env file. ⚠️  No .env file found. Using system environment variables.")
-	}
+
+	//err := godotenv.Load() // load env into memory or process's environment, useful for local dev if env file is used, no need if env is used from environment variable provided by os
+	// if err != nil {
+	// 	log.Println("❌ Error loading .env file. ⚠️  No .env file found. Using system environment variables.")
+	// }
 
 	PORT = getEnv("GO_PORT", "8080")
-	ROUTER_TYPE = getEnv("ROUTER_TYPE", "fiber")
-	DB_TYPE = getEnv("DB_TYPE", "gorm")
-	MYSQL_DB = getEnv("MYSQL_DATABASE", "mysql db")
 
 	SECRET_KEY = os.Getenv("JWT_SECRET")
 	USER_EMAIL = os.Getenv("EMAIL_USER")
 	USER_PASS = os.Getenv("EMAIL_PASS")
-
-	DB_USER := os.Getenv("DB_USER")
-	DB_PASS := os.Getenv("DB_PASSWORD")
-
-	DB_HOST := getEnv("DB_HOST", "localhost")
-	MYSQL_PORT := getEnv("MYSQL_PORT", "3306")
-	//MYSQL_DSN := getEnv("DSN", "user:password@tcp(127.0.0.1:3306)/db")
-
-	DSN = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", DB_USER, DB_PASS, DB_HOST, MYSQL_PORT, MYSQL_DB)
-	//DSN = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DB_USER, DB_PASS, DB_HOST, MYSQL_PORT, MYSQL_DB)
-	//DSN = MYSQL_DSN
+	DSN = os.Getenv("DSN")
 
 }
 

@@ -10,6 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// multipart form - uploads image here
 func CreateBlog(c *fiber.Ctx) error {
 	db := c.Locals("db").(*gorm.DB)
 	userID := c.Locals("userId").(string)
@@ -67,6 +68,7 @@ func CreateBlog(c *fiber.Ctx) error {
 	})
 }
 
+// takes uploaded image name
 func CreatePost(c *fiber.Ctx) error {
 	db := c.Locals("db").(*gorm.DB)
 	var blogpost models.Blog
